@@ -1,0 +1,37 @@
+# Δημοσίευση της εφαρμογής Android: όταν ανέβει branch "upload-android/vX.Y.Z" με το APK και το latest.json,
+# ελέγχει το SHA-256, δημιουργεί Release "android-vX.Y.Z" (ΟΧΙ latest, ώστε να μην επηρεάζεται η ενημέρωση
+# του server), ενημερώνει το android/latest.json στο main (το διαβάζει η εφαρμογή) και σβήνει το branch.
+name: android
+on:
+  push:
+    branches: ['upload-android/**']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Έλεγχος
+        run: |
+          set -euo pipefail
+          V="${GITHUB_REF_NAME#upload-android/v}"
+          [[ "$V" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit 1
+          GOT=$(sha256sum "release/PlanDesk-$V.apk" | cut -d' ' -f1)
+          [ "$(cat release/sha256.txt)" = "$GOT" ] || { echo "SHA-256 mismatch"; exit 1; }
+          grep -q "\"$GOT\"" release/latest.json || { echo "latest.json mismatch"; exit 1; }
+          echo "V=$V" >> "$GITHUB_ENV"
+      - name: Release και latest.json
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release create "android-v$V" "release/PlanDesk-$V.apk" --repo "$GITHUB_REPOSITORY" --target main \
+            --title "PlanDesk Android $V" --notes-file release/notes.txt --latest=false
+          cp release/latest.json /tmp/latest.json
+          git fetch -q origin main; git checkout -q -B main origin/main
+          mkdir -p android; cp /tmp/latest.json android/latest.json
+          git add android/latest.json
+          git -c user.name=github-actions -c user.email=41898282+github-actions[bot]@users.noreply.github.com commit -qm "Android $V"
+          git push -q origin main
+          git push origin --delete "$GITHUB_REF_NAME"
