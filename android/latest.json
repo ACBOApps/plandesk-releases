@@ -1,7 +1,7 @@
 {
-  "version": "1.1.0",
-  "code": 3,
-  "sha256": "d6bba8376039debe634b3f53400f2df11c920324cd19358823cd4897f151e1cd",
-  "notes": "Κλείδωμα με δακτυλικό αποτύπωμα ή PIN του κινητού. Ενημέρωση της εφαρμογής μέσα από την ίδια.",
-  "url": "https://github.com/ACBOApps/plandesk-releases/releases/download/android-v1.1.0/PlanDesk-1.1.0.apk"
+  "version": "1.2.0",
+  "code": 4,
+  "sha256": "2d03ba9a83bf72f5f538c2e7b6ddb7ed987fecd4afcc0bca80e775e0233213b7",
+  "notes": "Οδηγία και κουμπί όταν το VPN δεν ανοίγει επειδή η μπαταρία του WireGuard είναι περιορισμένη.",
+  "url": "https://github.com/ACBOApps/plandesk-releases/releases/download/android-v1.2.0/PlanDesk-1.2.0.apk"
 }
