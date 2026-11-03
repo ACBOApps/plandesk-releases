@@ -1,7 +1,7 @@
 {
-  "version": "1.2.0",
-  "code": 4,
-  "sha256": "2d03ba9a83bf72f5f538c2e7b6ddb7ed987fecd4afcc0bca80e775e0233213b7",
-  "notes": "Οδηγία και κουμπί όταν το VPN δεν ανοίγει επειδή η μπαταρία του WireGuard είναι περιορισμένη.",
-  "url": "https://github.com/ACBOApps/plandesk-releases/releases/download/android-v1.2.0/PlanDesk-1.2.0.apk"
+  "version": "1.2.1",
+  "code": 5,
+  "sha256": "bda66b3e2964eb91452fd33e2dfe8488dc14c489480b16cb6084336ded099449",
+  "notes": "Ρυθμίσεις: παρατεταμένο πάτημα στο εικονίδιο του PlanDesk → «Ρυθμίσεις». Οδηγία όταν το VPN δεν ανοίγει λόγω περιορισμένης μπαταρίας του WireGuard.",
+  "url": "https://github.com/ACBOApps/plandesk-releases/releases/download/android-v1.2.1/PlanDesk-1.2.1.apk"
 }
